@@ -1,0 +1,48 @@
+#emoji_container {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-gap: 15px
+}
+
+.emoji {
+    display: flex;
+    background: #fff;
+    border-radius: 10px;
+    min-height: 50px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+.emoji:hover {
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.22);
+    transform: scale(1.1)
+}
+
+.emoji:active {
+    box-shadow: inset 0px 6px 10px rgba(0, 0, 0, 0.22);
+    transform: scale(1)
+}
+
+.icon {
+    padding-top: 12px;
+    font-size: 30px;
+    font-family: fantasy;
+    user-select: none;
+}
+
+@media only screen and (max-width: 1300px) {
+    #emoji_container {
+        grid-template-columns: repeat(8, 1fr);
+        grid-gap: 10px
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #emoji_container {
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px
+    }
+}

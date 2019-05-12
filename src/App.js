@@ -1,26 +1,98 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Header from './Header/index'
+import EmojiList from './EmojiList/index'
+import SideBar from './SideBar/index'
+
+import { db } from './Firebase'
+import './App.css'
+
+export default class App extends Component {
+  state = {
+    search: '',
+    action: '',
+    return: 'char',
+    platform: '',
+    gender: '',
+    color: '',
+    copied: false,
+    emojisCopied: null
+  }
+  componentDidMount() {
+    db.ref('/emojis_copied').on('value', snap => {
+      this.setState({
+        emojisCopied: snap.val()
+      })
+    })
+  }
+  makeChange = (type, value) => {
+    this.setState({
+      [type]: value
+    })
+  }
+  copy = lastCopied => {
+    this.green.play()
+    this.setState(
+      {
+        copied: true,
+        lastCopied
+      },
+      () =>
+        setTimeout(() => {
+          this.setState({ copied: false })
+        }, 700)
+    )
+    if (this.state.emojisCopied) {
+      db.ref('/emojis_copied').transaction(value => {
+        if (value) {
+          value = value + 1
+        }
+        return value
+      })
+    }
+  }
+  copied() {
+    let top = window.scrollY
+    return (
+      <div
+        className={this.state.copied ? 'fadeIn' : 'fadeOut'}
+        id="copied_container"
+        style={{
+          top: top
+        }}>
+        <div style={{ position: 'relative', left: '-50%' }} id="copied">
+          <h1>Copied</h1>
+          <p style={{ color: 'grey', fontWeight: 500 }}>
+            {this.state.lastCopied}
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <SideBar emojisCopied={this.state.emojisCopied} />
+        <audio
+          ref={green => {
+            this.green = green
+          }}>
+          <source src="/click.mp3" type="audio/mpeg" />
+        </audio>
+        <Header
+          makeChange={(type, value) => this.makeChange(type, value)}
+          filters={this.state}
+        />
+        <EmojiList
+          filters={this.state}
+          firebase
+          deploy
+          copy={lastCopied => this.copy(lastCopied)}
+          return={this.state.return}
+        />
+        {this.copied()}
+      </div>
+    )
+  }
 }
-
-export default App;

@@ -1,0 +1,96 @@
+#header {
+    display: grid;
+    grid-template-columns: repeat(15, 2fr);
+    grid-gap: 15px
+}
+
+#header div h4 {
+    color: #6b6b6bfc;
+    margin: 10px 20px;
+    user-select: none;
+
+}
+
+
+.option_container {
+    background: #fff;
+    height: 50px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    -webkit-appearance: none;
+}
+
+#search {
+    grid-column: 1 / 7;
+}
+
+#action {
+    grid-column: 7 / 10;
+}
+
+#gender {
+    grid-column: 10 / 13;
+}
+
+#color {
+    grid-column: 13 / 16;
+}
+
+#searchInput {
+    border: none;
+    padding-left: 20px;
+    width: -webkit-fill-available;
+}
+
+.select_container {
+    background: #fff;
+    height: 50px;
+    width: -webkit-fill-available;
+    border-radius: 10px;
+    padding: 0 10px
+}
+
+.disabled_option {
+    background: #d8d8d8;
+    color: #9e9e9e
+}
+
+.select {
+    width: -webkit-fill-available;
+    padding-left: 20px;
+    border: none;
+}
+
+@media only screen and (max-width: 1300px) {
+    #header {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px
+    }
+
+    #header div {
+        grid-column: auto
+    }
+
+    #gender {
+        display: none
+    }
+
+    #color {
+        display: none
+    }
+
+}
+
+@media only screen and (max-width: 850px) {
+    #header {
+        grid-template-columns: 1fr;
+        grid-gap: 10px
+    }
+
+    #header div {
+        grid-column: auto
+    }
+
+}
