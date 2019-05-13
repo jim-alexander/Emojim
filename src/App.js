@@ -18,7 +18,7 @@ export default class App extends Component {
     skin: -1,
     copied: false,
     emojisCopied: null,
-    lightTheme: false
+    lightTheme: true
   }
   componentDidMount() {
     db.ref('/emojis_copied').on('value', snap => {
