@@ -1,5 +1,6 @@
 .App {
-  margin: 20px 60px 100px 60px
+  padding: 20px 60px 100px 60px;
+  min-height: -webkit-fill-available;
 }
 
 #copied_container {
@@ -8,6 +9,11 @@
   position: absolute;
   left: 50%;
   transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+
+.transition {
+  transition: background 1s ease-in-out
 }
 
 #copied {

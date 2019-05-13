@@ -13,7 +13,7 @@
 
 
 .option_container {
-    background: #fff;
+    /* background: #fff; */
     height: 50px;
     width: 100%;
     border-radius: 10px;
@@ -35,13 +35,30 @@
 }
 
 #color {
-    grid-column: 13 / 16;
+    grid-column: 13 / 15;
 }
 
 #searchInput {
     border: none;
     padding-left: 20px;
     width: -webkit-fill-available;
+}
+
+
+.theme {
+    grid-column: 15 / 16;
+    /* grid-row: 1 / 2; */
+    font-size: 30px
+}
+
+
+
+.placeholderLight::placeholder {
+    color: rgb(80, 80, 80)
+}
+
+.placeholderDark::placeholder {
+    color: #fff
 }
 
 .select_container {
@@ -65,8 +82,12 @@
 
 @media only screen and (max-width: 1300px) {
     #header {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         grid-gap: 10px
+    }
+
+    #search {
+        grid-column: 1 / 4 !important
     }
 
     #header div {
@@ -77,16 +98,24 @@
         display: none
     }
 
-    #color {
+    #theme {
         display: none
     }
 
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 650px) {
     #header {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         grid-gap: 10px
+    }
+
+    #search {
+        grid-column: 1 / 3 !important
+    }
+
+    #action {
+        display: none
     }
 
     #header div {

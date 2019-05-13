@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
-// import emojis from './emoji_list.json'
 import emojis from './emoji_list2.json'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { Dark, Light } from '../Colors'
+
 import './index.css'
 
 export default class EmojiList extends Component {
   build = () => {
     const emojiObject = (emoji, toCopy) => (
       <CopyToClipboard text={toCopy} key={emoji.order}>
-        <div className="emoji" onClick={() => this.props.copy(toCopy)}>
+        <div
+          className="emoji transition"
+          onClick={() => this.props.copy(toCopy)}
+          style={{
+            background: this.props.lightTheme
+              ? Light.containers
+              : Dark.containers,
+            color: this.props.lightTheme ? Light.text : Dark.text
+          }}>
           <div className="icon">{emoji.emoji}</div>
         </div>
       </CopyToClipboard>
@@ -82,7 +91,12 @@ export default class EmojiList extends Component {
   }
 
   news = () => (
-    <div className="emoji notice news">
+    <div
+      className="emoji notice news transition"
+      style={{
+        background: this.props.lightTheme ? Light.containers : Dark.containers,
+        color: this.props.lightTheme ? Light.text : Dark.text
+      }}>
       <h2>News</h2>
       <p>
         <span role="img" aria-label="number">
@@ -91,16 +105,16 @@ export default class EmojiList extends Component {
         {' Live counter added!'}
       </p>
       <p>
-        <span role="img" aria-label="speaker">
-          🔊
+        <span role="img" aria-label="moon">
+          🌘
         </span>
-        {' Click sound added!'}
+        {' Dark mode added!'}
       </p>
       <p>
         <span role="img" aria-label="tick">
           🛠
         </span>
-        {' Added filters!'}
+        {' Filters added!'}
       </p>
       <p>
         <span role="img" aria-label="hand">
@@ -109,25 +123,44 @@ export default class EmojiList extends Component {
         <a
           href="mailto:alexanderj2396@gmail.com"
           target="_blank"
+          className="transition"
+          style={{
+            color: this.props.lightTheme ? Light.text : Dark.text
+          }}
           rel="noopener noreferrer">
-          {' Feedback & Suggestions'}
+          {' Feedback here!'}
         </a>
       </p>
     </div>
   )
   counter = () =>
     this.props.emojisCopied ? (
-      <div className="emoji notice counter ">
+      <div
+        className="emoji notice counter transition"
+        style={{
+          background: this.props.lightTheme
+            ? Light.containers
+            : Dark.containers,
+          color: this.props.lightTheme ? Light.text : Dark.text
+        }}>
         <p>
           {this.props.emojisCopied}
           <span style={{ fontWeight: 400 }}>{' Copies'}</span>
         </p>
       </div>
     ) : (
-      <div className="emoji notice counter ">
+      <div
+        className="emoji notice counter transition"
+        style={{
+          background: this.props.lightTheme
+            ? Light.containers
+            : Dark.containers,
+          color: this.props.lightTheme ? Light.text : Dark.text
+        }}>
         <p>{`Loading`}</p>
       </div>
     )
+
   render() {
     return (
       <div>
@@ -135,6 +168,7 @@ export default class EmojiList extends Component {
           {this.news()}
           {this.counter()}
           {this.build()}
+          {/* {this.themeButton()} */}
         </div>
       </div>
     )

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Header from './Header/index'
 import EmojiList from './EmojiList/index'
 import SideBar from './SideBar/index'
+import { Dark, Light } from './Colors'
 
 import { db } from './Firebase'
 import './App.css'
@@ -16,7 +17,8 @@ export default class App extends Component {
     category: -1,
     skin: -1,
     copied: false,
-    emojisCopied: null
+    emojisCopied: null,
+    lightTheme: false
   }
   componentDidMount() {
     db.ref('/emojis_copied').on('value', snap => {
@@ -24,6 +26,9 @@ export default class App extends Component {
         emojisCopied: snap.val()
       })
     })
+    localStorage.getItem('theme') === 'true'
+      ? this.setState({ lightTheme: true })
+      : this.setState({ lightTheme: false })
   }
   makeChange = (type, value) => {
     this.setState({
@@ -60,7 +65,16 @@ export default class App extends Component {
         style={{
           top: top
         }}>
-        <div style={{ position: 'relative', left: '-50%' }} id="copied">
+        <div
+          style={{
+            position: 'relative',
+            left: '-50%',
+            backgroundColor: this.state.lightTheme
+              ? Light.containers
+              : Dark.containers,
+            color: this.state.lightTheme ? Light.text : Dark.text
+          }}
+          id="copied">
           <h1>Copied</h1>
           <p style={{ color: 'grey', fontWeight: 500 }}>
             {this.state.lastCopied}
@@ -69,11 +83,21 @@ export default class App extends Component {
       </div>
     )
   }
+  changeTheme = () =>
+    this.setState({ lightTheme: !this.state.lightTheme }, () =>
+      localStorage.setItem('theme', this.state.lightTheme)
+    )
 
   render() {
     return (
-      <div className="App">
-        <SideBar />
+      <div
+        className="App transition"
+        style={{
+          backgroundColor: this.state.lightTheme
+            ? Light.background
+            : Dark.background
+        }}>
+        <SideBar lightTheme={this.state.lightTheme} />
         <audio
           ref={green => {
             this.green = green
@@ -83,14 +107,15 @@ export default class App extends Component {
         <Header
           makeChange={(type, value) => this.makeChange(type, value)}
           filters={this.state}
+          changeTheme={this.changeTheme}
+          lightTheme={this.state.lightTheme}
         />
         <EmojiList
           filters={this.state}
-          firebase
+          lightTheme={this.state.lightTheme}
           emojisCopied={this.state.emojisCopied}
           skin={this.state.skin}
           category={this.state.category}
-          deploy
           copy={lastCopied => this.copy(lastCopied)}
           return={this.state.return}
         />
