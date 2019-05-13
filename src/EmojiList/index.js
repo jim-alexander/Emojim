@@ -5,10 +5,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import './index.css'
 
 export default class EmojiList extends Component {
-  //AD OR CONTENT CSS {
-  //   grid-column: 10/13;
-  //   grid-row: 2/5;
-  // }
   build = () =>
     emojis.map((emoji, index) => {
       let search = this.props.filters.search ? this.props.filters.search : null
@@ -38,10 +34,61 @@ export default class EmojiList extends Component {
       }
       return null
     })
+  news = () => (
+    <div className="emoji notice news">
+      <h2>News</h2>
+      <p>
+        <span role="img" aria-label="number">
+          🔢
+        </span>
+        {' Live counter added!'}
+      </p>
+      <p>
+        <span role="img" aria-label="speaker">
+          🔊
+        </span>
+        {' Click sound added!'}
+      </p>
+      <p>
+        <span role="img" aria-label="tick">
+          🛠
+        </span>
+        {' Working on filters.'}
+      </p>
+      <p>
+        <span role="img" aria-label="hand">
+          ❓
+        </span>
+        <a
+          href="mailto:alexanderj2396@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer">
+          {' Feedback & Suggestions'}
+        </a>
+      </p>
+    </div>
+  )
+  counter = () =>
+    this.props.emojisCopied ? (
+      <div className="emoji notice counter ">
+        <p>
+          {this.props.emojisCopied}
+          <span style={{ fontWeight: 400 }}>{' Copies'}</span>
+        </p>
+      </div>
+    ) : (
+      <div className="emoji notice counter ">
+        <p>{`Loading`}</p>
+      </div>
+    )
   render() {
     return (
       <div>
-        <div id="emoji_container">{this.build()}</div>
+        <div id="emoji_container">
+          {this.news()}
+          {this.counter()}
+          {this.build()}
+        </div>
       </div>
     )
   }

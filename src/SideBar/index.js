@@ -2,11 +2,6 @@ import React, { Component } from 'react'
 
 import './index.css'
 export default class SideBar extends Component {
-  emojisCopied = () =>
-    this.props.emojisCopied ? (
-      <div id="emojis_copied">{`${this.props.emojisCopied} emojis copied`}</div>
-    ) : null
-
   render() {
     return (
       <div>
@@ -20,7 +15,7 @@ export default class SideBar extends Component {
             @Jimalexander
           </a>
         </div>
-        {this.emojisCopied()}
+        {/* {this.emojisCopied()} */}
       </div>
     )
   }

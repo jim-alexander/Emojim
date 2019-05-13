@@ -33,16 +33,79 @@
     user-select: none;
 }
 
+.news {
+    grid-column: 13 / 16;
+    grid-row: 2 / 5;
+    display: block;
+
+}
+
+.counter {
+    grid-column: 13 / 16;
+    grid-row: 1 / 2;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+}
+
+.counter p {
+    font-weight: 700 !important;
+
+}
+
+
+.notice {
+    padding: 5px 20px 5px 20px;
+    cursor: auto;
+}
+
+.notice h2 {
+    text-align: center;
+    margin-bottom: 10px
+}
+
+.notice p {
+    font-weight: 500;
+    margin: 10px
+}
+
+.notice:hover {
+    transform: none;
+    box-shadow: none
+}
+
+.notice:active {
+    box-shadow: none
+}
+
+
 @media only screen and (max-width: 1300px) {
     #emoji_container {
         grid-template-columns: repeat(8, 1fr);
         grid-gap: 10px
     }
+
+    .counter {
+        grid-column: 7 / 9;
+        grid-row: 1 / 2
+    }
+
+    .news {
+        display: none
+    }
+
 }
 
 @media only screen and (max-width: 650px) {
     #emoji_container {
         grid-template-columns: repeat(4, 1fr);
         grid-gap: 10px
+    }
+
+    .notice {
+        display: none
     }
 }

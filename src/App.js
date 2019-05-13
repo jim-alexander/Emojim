@@ -73,7 +73,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <SideBar emojisCopied={this.state.emojisCopied} />
+        <SideBar />
         <audio
           ref={green => {
             this.green = green
@@ -87,6 +87,7 @@ export default class App extends Component {
         <EmojiList
           filters={this.state}
           firebase
+          emojisCopied={this.state.emojisCopied}
           deploy
           copy={lastCopied => this.copy(lastCopied)}
           return={this.state.return}

@@ -6,15 +6,3 @@
     color: #6b6b6bfc;
     font-weight: bold;
 }
-
-#emojis_copied {
-    position: fixed;
-    transform: rotate(-90deg);
-    left: -95px;
-    width: 250px;
-    bottom: 180px;
-    font-feature-settings: "tnum";
-    font-variant-numeric: tabular-nums;
-    color: #6b6b6bfc;
-    font-weight: bold;
-}
