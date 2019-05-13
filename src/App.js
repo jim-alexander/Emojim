@@ -13,8 +13,8 @@ export default class App extends Component {
     action: '',
     return: 'char',
     platform: '',
-    gender: '',
-    color: '',
+    category: -1,
+    skin: -1,
     copied: false,
     emojisCopied: null
   }
@@ -88,6 +88,8 @@ export default class App extends Component {
           filters={this.state}
           firebase
           emojisCopied={this.state.emojisCopied}
+          skin={this.state.skin}
+          category={this.state.category}
           deploy
           copy={lastCopied => this.copy(lastCopied)}
           return={this.state.return}
