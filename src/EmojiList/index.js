@@ -165,7 +165,7 @@ export default class EmojiList extends Component {
     return (
       <div>
         <div id="emoji_container">
-          {this.news()}
+          {/* {this.news()} */}
           {this.counter()}
           {this.build()}
           {/* {this.themeButton()} */}
