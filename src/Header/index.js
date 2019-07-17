@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Dark, Light } from '../Colors'
-import { IoIosMoon, IoIosSunny } from 'react-icons/io'
+import React, { Component } from "react";
+import { Dark, Light } from "../Colors";
+import { IoIosMoon, IoIosSunny } from "react-icons/io";
 
-import './index.css'
+import "./index.css";
 
 export default class Header extends Component {
   themeButton = () =>
@@ -26,7 +26,7 @@ export default class Header extends Component {
         }}>
         <IoIosSunny />
       </div>
-    )
+    );
   render() {
     return (
       <div id="header">
@@ -52,10 +52,10 @@ export default class Header extends Component {
               placeholder="Search for something..."
               id="searchInput"
               className={`option_container ${
-                this.props.lightTheme ? 'placeholderLight' : 'placeholderDark'
+                this.props.lightTheme ? "placeholderLight" : "placeholderDark"
               } transition`}
               onChange={e =>
-                this.props.makeChange('search', e.target.value.toLowerCase())
+                this.props.makeChange("search", e.target.value.toLowerCase())
               }
             />
           </div>
@@ -76,7 +76,7 @@ export default class Header extends Component {
                 : Dark.containers,
               color: this.props.lightTheme ? Light.text : Dark.text
             }}
-            onChange={e => this.props.makeChange('return', e.target.value)}>
+            onChange={e => this.props.makeChange("return", e.target.value)}>
             <option value="copy">Copy Symbol</option>
             <option value="code">Copy Codes</option>
           </select>
@@ -97,7 +97,7 @@ export default class Header extends Component {
                 : Dark.containers,
               color: this.props.lightTheme ? Light.text : Dark.text
             }}
-            onChange={e => this.props.makeChange('category', e.target.value)}>
+            onChange={e => this.props.makeChange("category", e.target.value)}>
             <option value={-1}>None</option>
             <option value={0}>Smileys & Emotion</option>
             <option value={1}>People & Body</option>
@@ -127,7 +127,7 @@ export default class Header extends Component {
                 : Dark.containers,
               color: this.props.lightTheme ? Light.text : Dark.text
             }}
-            onChange={e => this.props.makeChange('skin', e.target.value)}>
+            onChange={e => this.props.makeChange("skin", e.target.value)}>
             <option value={-1}>None</option>
             <option value={0}>Light</option>
             <option value={1}>Medium-Light</option>
@@ -141,13 +141,13 @@ export default class Header extends Component {
             className="transition"
             style={{
               color: this.props.lightTheme ? Light.subText : Dark.subText,
-              margin: '10px 0 10px 10px'
+              margin: "10px 0 10px 10px"
             }}>
             Theme
           </h4>
           {this.themeButton()}
         </div>
       </div>
-    )
+    );
   }
 }
