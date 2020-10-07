@@ -20,8 +20,8 @@ export default class App extends Component {
     emojisCopied: null,
     lightTheme: true
   }
+
   componentDidMount() {
-    window.location = 'https://emojim.jialx.com'
     db.ref('/emojis_copied').on('value', (snap) => {
       this.setState({
         emojisCopied: snap.val()
@@ -75,6 +75,7 @@ export default class App extends Component {
       </div>
     )
   }
+
   changeTheme = () =>
     this.setState({ lightTheme: !this.state.lightTheme }, () => localStorage.setItem('theme', this.state.lightTheme))
 
