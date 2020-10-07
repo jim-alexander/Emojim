@@ -1,42 +1,43 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 
-import Header from "./Header/index";
-import EmojiList from "./EmojiList/index";
-import SideBar from "./SideBar/index";
-import { Dark, Light } from "./Colors";
+import Header from './Header/index'
+import EmojiList from './EmojiList/index'
+import SideBar from './SideBar/index'
+import { Dark, Light } from './Colors'
 
-import { db } from "./Firebase";
-import "./App.css";
+import { db } from './Firebase'
+import './App.css'
 
 export default class App extends Component {
   state = {
-    search: "",
-    action: "",
-    return: "char",
-    platform: "",
+    search: '',
+    action: '',
+    return: 'char',
+    platform: '',
     category: -1,
     skin: -1,
     copied: false,
     emojisCopied: null,
     lightTheme: true
-  };
+  }
   componentDidMount() {
-    db.ref("/emojis_copied").on("value", snap => {
+    window.location = 'https://emojim.jialx.com'
+    db.ref('/emojis_copied').on('value', (snap) => {
       this.setState({
         emojisCopied: snap.val()
-      });
-    });
-    localStorage.getItem("theme") === "true"
+      })
+    })
+    localStorage.getItem('theme') === 'true'
       ? this.setState({ lightTheme: true })
-      : this.setState({ lightTheme: false });
+      : this.setState({ lightTheme: false })
   }
   makeChange = (type, value) => {
     this.setState({
       [type]: value
-    });
-  };
-  copy = lastCopied => {
-    this.green.play();
+    })
+  }
+  copy = (lastCopied) => {
+    this.green.play()
     this.setState(
       {
         copied: true,
@@ -44,72 +45,59 @@ export default class App extends Component {
       },
       () =>
         setTimeout(() => {
-          this.setState({ copied: false });
+          this.setState({ copied: false })
         }, 700)
-    );
+    )
     if (this.state.emojisCopied) {
-      db.ref("/emojis_copied").transaction(value => {
-        if (value) {
-          value = value + 1;
-        }
-        return value;
-      });
+      db.ref('/emojis_copied').transaction((value) => value + 1)
     }
-  };
+  }
   copied() {
-    let top = window.scrollY;
+    let top = window.scrollY
     return (
       <div
-        className={this.state.copied ? "fadeIn" : "fadeOut"}
-        id="copied_container"
+        className={this.state.copied ? 'fadeIn' : 'fadeOut'}
+        id='copied_container'
         style={{
           top: top
         }}>
         <div
           style={{
-            position: "relative",
-            left: "-50%",
-            backgroundColor: this.state.lightTheme
-              ? Light.containers
-              : Dark.containers,
+            position: 'relative',
+            left: '-50%',
+            backgroundColor: this.state.lightTheme ? Light.containers : Dark.containers,
             color: this.state.lightTheme ? Light.text : Dark.text
           }}
-          id="copied">
+          id='copied'>
           <h1>Copied</h1>
-          <p style={{ color: "grey", fontWeight: 500 }}>
-            {this.state.lastCopied}
-          </p>
+          <p style={{ color: 'grey', fontWeight: 500 }}>{this.state.lastCopied}</p>
         </div>
       </div>
-    );
+    )
   }
   changeTheme = () =>
-    this.setState({ lightTheme: !this.state.lightTheme }, () =>
-      localStorage.setItem("theme", this.state.lightTheme)
-    );
+    this.setState({ lightTheme: !this.state.lightTheme }, () => localStorage.setItem('theme', this.state.lightTheme))
 
   render() {
     return (
-      <div className="App transition">
+      <div className='App transition'>
         <div
           style={{
-            backgroundColor: this.state.lightTheme
-              ? Light.background
-              : Dark.background,
-            height: "100vh",
-            position: "fixed",
+            backgroundColor: this.state.lightTheme ? Light.background : Dark.background,
+            height: '100vh',
+            position: 'fixed',
             top: 0,
             left: 0,
-            width: "100%",
+            width: '100%',
             zIndex: -1
           }}
         />
-        <SideBar lightTheme={this.state.lightTheme} />
+        {/* <SideBar lightTheme={this.state.lightTheme} /> */}
         <audio
-          ref={green => {
-            this.green = green;
+          ref={(green) => {
+            this.green = green
           }}>
-          <source src="/click.mp3" type="audio/mpeg" />
+          <source src='/click.mp3' type='audio/mpeg' />
         </audio>
         <Header
           makeChange={(type, value) => this.makeChange(type, value)}
@@ -123,11 +111,11 @@ export default class App extends Component {
           emojisCopied={this.state.emojisCopied}
           skin={this.state.skin}
           category={this.state.category}
-          copy={lastCopied => this.copy(lastCopied)}
+          copy={(lastCopied) => this.copy(lastCopied)}
           return={this.state.return}
         />
         {this.copied()}
       </div>
-    );
+    )
   }
 }

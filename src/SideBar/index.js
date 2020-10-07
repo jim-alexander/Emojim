@@ -7,7 +7,7 @@ export default class SideBar extends Component {
     return (
       <div>
         <div
-          id="credit"
+          id='credit'
           style={{
             color: this.props.lightTheme ? Light.subText : Dark.subText
           }}>
@@ -18,9 +18,9 @@ export default class SideBar extends Component {
               textDecoration: 'none',
               color: this.props.lightTheme ? Light.text : Dark.text
             }}
-            href="https://jimalexander.info/"
-            target="_blank"
-            rel="noopener noreferrer">
+            href='https://jialx.com/'
+            target='_blank'
+            rel='noopener noreferrer'>
             @Jimalexander
           </a>
         </div>
